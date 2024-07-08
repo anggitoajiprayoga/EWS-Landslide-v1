@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EWS Landslide</title>
+    <style>
+        .center-align {
+            text-align: center;
+        }
+        .files-section {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .files-section h3 {
+            text-align: center;
+        }
+        .files-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .files-section li {
+            margin-bottom: 10px;
+        }
+        .files-section li a {
+            display: inline-block;
+            background-color: #ff5f5f;
+            color: white;
+         padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .files-section li a:hover {
+            background-color: #ff2e2e;
+        }
+        legend {
+            color: white;
+            padding: 5px;
+            background: red;
+            border-radius: 5px;
+        }
+        fieldset {
+            max-width: 500px;
+            border-radius: 10px;
+            border-color: red;
+            background: white;
+        }
+        label {
+            color: black;
+            float: left;
+        }
+        .label2 {
+            color: black;
+            font: serif;
+        }
+        input {
+            border-color: red;
+            max-width: 200px;
+            border-radius: 3px;
+            height: 40px;
+            margin-top: 20px;
+        }
+        button {
+            cursor: pointer;
+            color: white;
+            background: #ff5f5f;
+            width: 85px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+        }
+        button:hover {
+            background: #ff2e2e;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 5px;
+            width: 110vw;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+        .form-style-10 {
+            max-width: 530px;
+            padding: 30px;
+            margin: 40px auto;
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+            -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+            -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+        }
+        .form-style-10 .inner-wrap {
+            padding: 30px;
+            background: #F8F8F8;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .form-style-10 h1 {
+            background: white;
+            padding: 40px 30px 15px 30px;
+            margin: -30px -30px 30px -30px;
+            border-radius: 10px 10px 0 0;
+            -webkit-border-radius: 10px 10px 0 0;
+            -moz-border-radius: 10px 10px 0 0;
+            color: black;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+            font: normal 30px 'Bitter', serif;
+            -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            border: 1px solid white;
+        }
+        .form-style-10 h1>span {
+            display: block;
+            margin-top: 2px;
+            font: 13px Arial, Helvetica, sans-serif;
+        }
+        a:link,
+        a:visited {
+            background-color: #ff5f5f;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            border: none;
+        }
+        a:hover,
+        a:active {
+            background-color: #ff2e2e;
+        }
+        .label2 {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-right: 50px; /* Memberikan padding kanan untuk elemen-elemen di sebelah kanan */
+            margin-bottom: 1px; /* Menambahkan margin bawah antara blok-blok .label2 */
+        }
+        .label2 > div {
+            flex: 1; /* Memiliki flex 1 untuk memenuhi ruang yang tersedia */
+        }
+        #container-en_view{
+            display: flex;
+            gap: 1em;
+        }
+        #ind{
+            display: inline-block;
+            position: absolute;
+            right: 1em;
+            top: 1em;
+        }
+        .forms{
+            position: relative;
+        }
+        #ind>span{
+            display: inline-block ;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 2em;
+        }
+        .redpoint{
+            background: #D80032;
+        }
+        .greenpoint{
+            background: #219C90;
+        }
+    </style>
+    
+</head>
+
+<body>
+  <div class="form-style-10 forms">
+      <h1>Landslide Early Warning System &nbsp &nbsp <button onclick="logoutButton()">Logout</button> <span>Form Configuration device</span> <span>~version~</span> <span>~type_board~</span> <span>~sn_dev~</span> <span>Note: Jika menggunakan hp gunakan mode dekstop untuk tampilan maksimal</span></h1>
+      <link rel="icon" href="data:,">
+      <div align="left">
+        <a href="/restart" onclick="submitRestart()" style="font-size: 12px;">Restart</a>
+        &nbsp;
+        <a href="/default" onclick="submitdefault()" style="font-size: 12px;">Reset Default</a>
+        &nbsp;
+        <a href="/" style="font-size: 12px;">Refresh</a>
+      </div>
+      <br>
+      <div id="container-en_view">
+        <div>
+            <div class="label2"><strong>Realtime Detail Info:</strong> <span id="ind"></span></div>
+            <div class="label2">Code Number: &nbsp; <span id="cn"></span></div>
+            <div class="label2">Serial Number: &nbsp; <span id="sn"></span></div>
+            <div class="label2">Date/Time: &nbsp; <span id="dateTime"></span></div>
+            <div class="label2">Time Zone: &nbsp; <span id="timeZone"></span></div>
+            <div class="label2">Displacement Z1-Z0: &nbsp; <span id="displacement_z1_z0"></span></div>
+            <div class="label2">Inclination Angle a0: &nbsp; <span id="inclination_angle_a0"></span></div>
+            <div class="label2">Inclination Angle a1: &nbsp; <span id="inclination_angle_a1"></span></div>
+            <div class="label2">Slope Length Y0: &nbsp; <span id="slope_length_y0"></span></div>
+            <div class="label2">Slope Length Y1: &nbsp; <span id="slope_length_y1"></span></div>
+            <div class="label2">Horizontal Length Z0: &nbsp; <span id="horizontal_length_z0"></span></div>
+            <div class="label2">Horizontal Length Z1: &nbsp; <span id="horizontal_length_z1"></span></div>
+            <div class="label2">Rotary Encorder: &nbsp; <span id="rotary_encorder"></span></div>
+            <div class="label2">Gyroscope X: &nbsp; <span id="gyroscope1"></span></div>
+            <div class="label2">Gyroscope Y: &nbsp; <span id="gyroscope2"></span></div>
+            <div class="label2">Contidion State: &nbsp; <span id="contidion_state"></span></div>
+            <div class="label2">Battery Voltage: &nbsp; <span id="battery_voltage"></span></div>
+            <div class="label2">PV Voltage: &nbsp; <span id="pv_voltage"></span></div>
+            <div class="label2">RSSI: &nbsp; <span id="rssi"></span></div>
+            <div class="label2">Longitude: &nbsp; <span id="lat"></span></div>
+            <div class="label2">Latitude: &nbsp; <span id="lng"></span></div>
+            <div class="label2">Altitude: &nbsp; <span id="alt"></span></div>
+          </div>
+      </div>
+      <br>
+      <fieldset>
+        <legend>Sensor Angle</legend>
+        <label>Calibration Sensor:</label>
+        <br/>
+        <br/>
+        <div class="button-container">
+            <button class="button" id="gyro" >Gyroscope</button>
+            <button class="button" id="encorder" >Encorder</button>
+            <button class="button" id="getalpha" >Get Alpha</button>
+        </div>
+      </fieldset>
+  <br>
+    <fieldset>
+        <legend>Config Device</legend>
+        <p> <label>Code Number:</label>
+        <div class="label2">&nbsp;</div> <input type="text" id="cnx" name="cn" value="~cn~" /> </p>
+        <p> <label>Serial Number:</label>
+        <div class="label2">&nbsp;</div> <input type="text" id="snx" name="sn" value="~sn~" /> </p>
+        <button type="button" onclick="config_device()">Save</button>
+      </fieldset><!-- <pre id="json_configdevice"></pre> -->
+      <br>
+      <fieldset>
+        <legend>Setup Value</legend>
+        <p> <label>Slope Length Y0 (mm):</label>
+        <div class="label2">&nbsp;</div> <input type="text" id="rope_default" name="rope_default" value="~rope_default~" /> </p>
+        <button type="button" onclick="setup_value()">Save</button>
+      </fieldset><!-- <pre id="json_configdevice"></pre> -->
+      <br>
+      <fieldset>
+        <legend>RTC Calibration</legend>
+        <p><br>
+        <label>Date</label> <input class="label2" type="date" name="set_date" id="myDate" value="~set_date~" step="any"><br>
+        <label>Time</label> <input class="label2" type="time" name="set_time" id="myTime" value="~set_time~" step="any"></p><br>
+        <button type="button" onclick="rtc_calibration()">Save</button>
+      </fieldset><!-- <pre id="json_rtccalibration"></pre> -->
+      <br>
+      <fieldset>
+        <legend>Set Point Displacement</legend>
+        <br>
+        <fieldset>
+            <legend>Safe</legend>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label for="dari" style="flex: 0 0 auto; margin-right: 10px;">from (mm):</label>
+                <input type="number" id="from_safe" name="from_safe" min="0" max="9999" value="~from_safe~" style="flex: 1;">
+                <label for="hingga" style="flex: 0 0 auto; margin-left: 20px; margin-right: 10px;">to (mm):</label>
+                <input type="number" id="to_safe" name="to_safe" min="0" max="9999" value="~to_safe~" style="flex: 1;">
+            </div>
+            <br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Alert</legend>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label for="dari" style="flex: 0 0 auto; margin-right: 10px;">from (mm):</label>
+                <input type="number" id="from_alert" name="from_alert" min="0" max="9999" value="~from_alert~" style="flex: 1;">
+                <label for="hingga" style="flex: 0 0 auto; margin-left: 20px; margin-right: 10px;">to (mm):</label>
+                <input type="number" id="to_alert" name="to_alert" min="0" max="9999" value="~to_alert~" style="flex: 1;">
+            </div>
+            <br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Caution</legend>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label for="dari" style="flex: 0 0 auto; margin-right: 10px;">from (mm):</label>
+                <input type="number" id="from_caution" name="from_caution" min="0" max="9999" value="~from_caution~" style="flex: 1;">
+                <label for="hingga" style="flex: 0 0 auto; margin-left: 20px; margin-right: 10px;">to (mm):</label>
+                <input type="number" id="to_caution" name="to_caution" min="0" max="9999" value="~to_caution~" style="flex: 1;">
+            </div>
+            <br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Danger</legend>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <label for="dari" style="flex: 0 0 auto; margin-right: 10px;">from (mm):</label>
+                <input type="number" id="from_danger" name="from_danger" min="0" max="9999" value="~from_danger~" style="flex: 1;">
+                <label for="hingga" style="flex: 0 0 auto; margin-left: 20px; margin-right: 10px;">to (mm):</label>
+                <input type="number" id="to_danger" name="to_danger" min="0" max="9999" value="~to_danger~" style="flex: 1;">
+            </div>
+            <br>
+        </fieldset>
+      <br>
+      <button type="button" onclick="setpoint_config()">Save</button>
+      <br>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Network Config</legend>
+      <p> <label>Data Selular:</label>
+        <div class="label2">&nbsp; &nbsp;</div>
+        <div class="label2">&nbsp; &nbsp;</div> <select id="en_lte" class="label2" name="en_lte" onchange="view_seluler()">
+            <option value="false" ~selected_disablelte~ class="option-style">Disable</option>
+            <option value="true" ~selected_enablelte~ class="option-style">Enable</option>
+        </select>
+        <div id="container-en_lte" style="display: none;">
+            <!-- mqtt -->
+            <p> <label>Nomor Simcard:</label>
+                <div class="label2">&nbsp; &nbsp;</div> <input type="text" id="no_simcard" name="no_simcard" value="~no_simcard~" /> </p>
+            <p> <label>MQTT:</label>
+            <div class="label2">&nbsp; &nbsp;</div>
+            <div class="label2">&nbsp; &nbsp;</div> <select id="en_mqtt" class="label2" name="en_mqtt" onchange="view_mqtt()">
+                <option value="false" ~selected_disablemqtt~ class="option-style">Disable</option>
+                <option value="true" ~selected_enablemqtt~ class="option-style">Enable</option>
+            </select>
+            <div id="container-en_mqtt" style="display: none;">
+                <p> <label>Broker:</label>
+                <div class="label2">&nbsp; &nbsp;</div> <input type="text" id="broker" name="broker" value="~broker~" /> </p>
+                <p> <label>Username:</label>
+                <div class="label2">&nbsp; &nbsp;</div> <input type="text" id="username" name="username" value="~username~" /> </p>
+                <p> <label>Password:</label>
+                <div class="label2">&nbsp; &nbsp;</div> <input type="text" id="pass" name="pass" value="~pass~" /> </p>
+                <p> <label>Interval Publish:</label>
+                <div class="label2">&nbsp; &nbsp;</div> <input type="text" id="interval_mqtt" name="interval_mqtt" value="~interval_mqtt~" />
+             </p> <button href="/kalibrasi" onclick="mqtt_test()">MQTT Test</button> &nbsp; Publish Test
+            </div>
+        </div>
+    </p>
+        </p> <button type="button" onclick="network_config()">Save</button>
+    </fieldset> <br>
+    <fieldset>
+      <legend>OTA Config</legend>
+      <p><label>Server OTA:</label></p>
+      <div class="label2">
+        &nbsp; &nbsp;
+      </div><input type="text" id="server_ota" name="server_ota" value="~server_ota~">
+      <p><label>Resource OTA:</label></p>
+      <div class="label2">
+        &nbsp; &nbsp;
+      </div><input type="text" id="resource_ota" name="resource_ota" value="~resource_ota~"><br><br>
+      <button type="button" onclick="ota_config()">Save</button>
+    </fieldset><!-- <pre id="json_networkconfig"></pre> -->
+  </div><br>
+  <center>
+    <p><b>Firmware:</b> ~version~</p>
+    <p><b>Free Storage:</b> <span id="freespiffs">~freespace~</span> | <b>Used Storage:</b> <span id="usedspiffs">~usedstorage~</span> | <b>Total Storage:</b> <span id="totalspiffs">~totalStorage~</span></p>
+    <div class="center-align">
+      <button type="submit" onclick="listFilesButton()">Files Downloads</button>
+    </div>
+    <div class="center-align files-section" id="detailsheader"></div>
+    <div class="center-align files-section" id="details"></div>
+    <div class="center-align files-section" id="status"></div>
+  </center><br>
+  <br>
+  <br>
+  <br>
+  <footer>
+    <div class="footer">
+      <marquee onmouseout='this.start()' onmouseover='this.stop()' scrollamount='4'>Copyright © SS6 - COE | PT PUTRA PERKASA ABADI | PT ANTAREJA MAHADA MAKMUR | Landslide Early Warning System</marquee>
+    </div>
+  </footer>
+</body>
+<script>
+    function initkalibrasi() {
+        document.getElementById('gyro').addEventListener('click', gyro);
+        document.getElementById('encorder').addEventListener('click', encorder);
+        document.getElementById('getalpha').addEventListener('click', getalpha);
+    }
+    function logoutButton() {
+        alert("Anda Berhasil Keluar..!");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/logout", true);
+        xhr.send();
+        setTimeout(function () {
+            window.open("/logged-out", "_self");
+        }, 200);
+    }
+    function gyro() {
+        alert("Gyroscope...!");
+        websocket.send('gyro');
+    }
+    function encorder() {
+        alert("Encorder...!");
+        websocket.send('encorder');
+    }
+    function getalpha() {
+        alert("Get Alpha...!");
+        websocket.send('get alpha');
+    }
+    function submitRestart() {
+        alert("Restarting...!");
+        setTimeout(function () {
+            window.open("/", "_self");
+        }, 500);
+    }
+    function submitdefault() {
+        alert("Reset Default...!");
+        setTimeout(function () {
+            window.open("/", "_self");
+        }, 500);
+    }
+    function mqtt_test() {
+        alert("Publish...!");
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "/publish", false);
+        xmlhttp.send();
+        setTimeout(function () {
+            window.open("/", "_self");
+        }, 500);
+    }
+    function listFilesButton() {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "/listfiles", false);
+        xmlhttp.send();
+        document.getElementById("detailsheader").innerHTML = "<h3>Files<h3>";
+        document.getElementById("details").innerHTML = xmlhttp.responseText;
+    }
+    function downloadDeleteButton(filename, action) {
+        var urltocall = "/file?name=" + filename + "&action=" + action;
+        if (action == "delete") {
+            var confirmation = confirm("Apakah Anda yakin ingin menghapus file ini?");
+            if (confirmation) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", urltocall, false);
+                xhr.send();
+                document.getElementById("status").innerHTML = xhr.responseText;
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", "/listfiles", false);
+                xmlhttp.send();
+                document.getElementById("details").innerHTML = xmlhttp.responseText;
+            }
+        }
+        if (action == "download") {
+            document.getElementById("status").innerHTML = "";
+            window.open(urltocall, "_blank");
+        }
+    }
+    function rtc_calibration() {
+        alert("Tersimpan...!");
+        var formData = {
+            date: document.getElementById('myDate').value,
+            time: document.getElementById('myTime').value
+        };
+        var jsonString = JSON.stringify(formData, null, 2);
+        websocket.send(jsonString);
+        console.log(jsonString);
+    }
+    function showUploadButtonFancy() {
+        document.getElementById("detailsheader").innerHTML = "<h3>Upload File<h3>";
+        document.getElementById("status").innerHTML = "";
+        var uploadform =
+        "<form method = \"POST\" action = \"/\" enctype=\"multipart/form-data\"><input type=\"file\" name=\"data\"/><input type=\"submit\" name=\"upload\" value=\"Upload\" title = \"Upload File\"></form>";
+        document.getElementById("details").innerHTML = uploadform;
+        var uploadform =
+        "<form id=\"upload_form\" enctype=\"multipart/form-data\" method=\"post\">" +
+        "<input type=\"file\" name=\"file1\" id=\"file1\" onchange=\"uploadFile()\"><br>" +
+        "<progress id=\"progressBar\" value=\"0\" max=\"100\" style=\"width:300px;\"></progress>" +
+        "<h3 id=\"status\"></h3>" +
+        "<p id=\"loaded_n_total\"></p>" +
+        "</form>";
+        document.getElementById("details").innerHTML = uploadform;
+    }
+    function _(el) {
+        return document.getElementById(el);
+    }
+    function progressHandler(event) {
+        _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes";
+        var percent = (event.loaded/ event.total) * 100;
+        _("progressBar").value = Math.round(percent);
+        _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+        if (percent >= 100) {
+            _("status").innerHTML = "Please wait, writing file to filesystem";
+        }
+    }
+    function completeHandler(event) {
+        _("status").innerHTML = "Upload Complete";
+        _("progressBar").value = 0;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "/listfiles", false);
+        xmlhttp.send();
+        document.getElementById("status").innerHTML = "File Uploaded";
+        document.getElementById("detailsheader").innerHTML = "<h3>Files<h3>";
+        document.getElementById("details").innerHTML = xmlhttp.responseText;
+    }
+    function errorHandler(event) {
+        _("status").innerHTML = "Upload Failed";
+    }
+    function abortHandler(event) {
+        _("status").innerHTML = "Upload Aborted";
+    }
+    var gateway = `ws://${window.location.hostname}/ws`;
+    var websocket;
+    
+    window.addEventListener('load', onload);
+    
+    function initWebSocket() {
+        console.log('Trying to open a WebSocket connection…');
+        websocket = new WebSocket(gateway);
+        websocket.onopen = onOpen;
+        websocket.onclose = onClose;
+        websocket.onmessage = onMessage;
+        websocket.onerror = onError; // Menambahkan penanganan error
+    }
+    
+    function onOpen(event) {
+        console.log('Connection opened');
+    }
+    
+    function onClose(event) {
+        console.log('Connection closed');
+        setTimeout(initWebSocket, 2000);
+    }
+    
+    function onError(event) {
+        console.error('WebSocket Error:', event);
+    }
+    
+    function onMessage(event) {
+        var myObj = JSON.parse(event.data);
+        localStorage.setItem('data', JSON.stringify(myObj));
+        showDataOnElement(myObj); // Mengirim objek langsung ke fungsi
+    }
+    
+    function onload(event) {
+        initkalibrasi();
+        initWebSocket();
+        view_seluler();
+        view_mqtt(); 
+    }
+    
+    function showDataOnElement(myObj) {
+        var keys = Object.keys(myObj);
+        setTimeout(() => {
+            for (var i = 0; i < keys.length; i++) {
+                var key = keys[i];
+                console.log(key);
+                var element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = myObj[key];
+                    if (key == 'ind') {
+                        if (myObj['ind'] == ' | ') {
+                            element.innerHTML = '<span class="redpoint"></span>';
+                        } else {
+                            element.innerHTML = '<span class="greenpoint"></span>';
+                        }
+                    }
+                }
+            }
+        }, 100);
+    }
+    
+        function config_device() {
+            alert("Tersimpan...!");
+            var formData = {
+                cn: document.getElementById('cnx').value,
+                sn: document.getElementById('snx').value
+            };
+            
+            var jsonString = JSON.stringify(formData, null, 2);
+            websocket.send(jsonString);
+            console.log(jsonString);
+        }
+
+        function setup_value() {
+            alert("Tersimpan...!");
+            var formData = {
+                rope_default: document.getElementById('rope_default').value
+            };
+            
+            var jsonString = JSON.stringify(formData, null, 2);
+            websocket.send(jsonString);
+            console.log(jsonString);
+        }
+
+        function network_config() {
+            alert("Tersimpan...!");
+            var formData = {
+                en_lte: document.getElementById('en_lte').value,
+                no_simcard: document.getElementById('no_simcard').value,
+                en_mqtt: document.getElementById('en_mqtt').value,
+                broker: document.getElementById('broker').value,
+                username: document.getElementById('username').value,
+                pass: document.getElementById('pass').value,
+                interval_mqtt: document.getElementById('interval_mqtt').value
+            };
+            var jsonString = JSON.stringify(formData, null, 2);
+            websocket.send(jsonString);
+            console.log(jsonString);
+        }
+
+        function setpoint_config() {
+            alert("Tersimpan...!");
+            var formData = {
+                form_safe: document.getElementById('form_safe').value,
+                to_safe: document.getElementById('to_safe').value,
+                form_alert: document.getElementById('form_alert').value,
+                to_alert: document.getElementById('to_alert').value,
+                form_caution: document.getElementById('form_caution').value,
+                to_caution: document.getElementById('to_caution').value,
+                form_danger: document.getElementById('form_danger').value,
+                to_danger: document.getElementById('to_danger').value
+            };
+            var jsonString = JSON.stringify(formData, null, 2);
+            websocket.send(jsonString);
+            console.log(jsonString);
+        }
+
+        function ota_config() {
+            alert("Tersimpan...!");
+            var formData = {
+                server_ota: document.getElementById('server_ota').value,
+                resource_ota: document.getElementById('resource_ota').value
+            };
+            var jsonString = JSON.stringify(formData, null, 2);
+            websocket.send(jsonString);
+            console.log(jsonString);
+        }
+
+        function view_seluler() {
+            var en_lte = document.getElementById('en_lte');
+            var containerlte = document.getElementById('container-en_lte');
+            if (typeof en_lte !== 'undefined') {
+                var value = en_lte.value;
+                if (value === 'true') {
+                    containerlte.style.display = 'block';
+                } else {
+                    containerlte.style.display = 'none';
+                }
+            }
+        }
+
+        function view_mqtt() {
+        var en_mqtt = document.getElementById('en_mqtt');
+        var containermqtt = document.getElementById('container-en_mqtt');
+        if (typeof en_mqtt !== 'undefined') {
+            var value = en_mqtt.value;
+            if (value === 'true') {
+                containermqtt.style.display = 'block';
+            } else {
+                containermqtt.style.display = 'none';
+            }
+        }
+        } 
+        
+    </script>
+</html>
